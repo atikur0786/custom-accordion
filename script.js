@@ -1,25 +1,27 @@
 const accordionItems = document.querySelectorAll(".accordion");
 
-for (let i = 0; i < accordionItems.length; i++) {
-  accordionItems[i].addEventListener("click", () => {
-    const accordionContent = accordionItems[i].querySelector(".accordion-item");
-    const accordionTitle = accordionItems[i].querySelector(".accordion-title");
-    const openIcon = accordionItems[i].querySelector(".open-icon");
-    const closeIcon = accordionItems[i].querySelector(".close-icon");
+accordionItems.forEach((item) => {
+  const content = item.querySelector(".accordion-item");
+  const title = item.querySelector(".accordion-title");
+  const openIcon = item.querySelector(".open-icon");
+  const closeIcon = item.querySelector(".close-icon");
 
-    // Toggle active class on the content
-    accordionContent.classList.toggle("active");
+  // Initialize with the plus icon visible and minus hidden
+  closeIcon.setAttribute("hidden", "");
 
-    // Toggle active class on the title
-    accordionTitle.classList.toggle("active");
+  // Add click event listener
+  title.addEventListener("click", () => {
+    // Toggle the active class for the content
+    content.classList.toggle("active");
+    title.classList.toggle("active");
 
-    // Toggle icons
-    if (accordionContent.classList.contains("active")) {
-      openIcon.setAttribute("hidden", "");
-      closeIcon.removeAttribute("hidden");
+    // Toggle icons visibility
+    if (content.classList.contains("active")) {
+      openIcon.setAttribute("hidden", ""); // Hide plus icon
+      closeIcon.removeAttribute("hidden"); // Show minus icon
     } else {
-      openIcon.removeAttribute("hidden");
-      closeIcon.setAttribute("hidden", "");
+      openIcon.removeAttribute("hidden"); // Show plus icon
+      closeIcon.setAttribute("hidden", ""); // Hide minus icon
     }
   });
-}
+});
